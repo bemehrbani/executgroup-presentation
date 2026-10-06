@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExecutGroup — Architecture & Domain Strategy Deck</title>
+    <meta name="description" content="Strategic architecture, domain allocation, and sign-in models for ExecutGroup, ExecutESG, and Aura.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'finnish-blue': '#003580',
+                        'finnish-blue-dark': '#002559',
+                        'finnish-blue-light': '#EBF2FA',
+                        'nordic-ice': '#F4F7FA',
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Slide print & transitions */
+        @media print {
+            body { background: white !important; }
+            .no-print { display: none !important; }
+            .slide-card { page-break-after: always; min-height: 100vh; box-shadow: none !important; border: 1px solid #E2E8F0 !important; }
+            #overview-grid { display: block !important; }
+            #slide-viewport { display: none !important; }
+        }
+        .slide-fade {
+            transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-nordic-ice text-slate-900 font-sans antialiased h-full flex flex-col select-none">
+
+    <!-- TOP HEADER RAIL -->
+    <header class="h-16 bg-white border-b border-slate-200 px-6 sm:px-10 flex items-center justify-between shrink-0 no-print z-20">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-finnish-blue text-white flex items-center justify-center font-bold text-sm tracking-wider shadow-sm">
+                EG
+            </div>
+            <div>
+                <span class="font-extrabold text-sm tracking-tight text-slate-900">ExecutGroup</span>
+                <span class="text-xs text-slate-400 ml-2 hidden sm:inline">| Strategic Architecture & Domain Strategy</span>
+            </div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="flex items-center gap-2 sm:gap-4">
+            <span id="slide-indicator" class="text-xs font-mono font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
+                Slide 1 / 6
+            </span>
+
+            <div class="flex items-center gap-1">
+                <button onclick="prevSlide()" class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-700 transition" title="Previous Slide (←)">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <button onclick="nextSlide()" class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-700 transition" title="Next Slide (→)">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+
+            <button onclick="toggleOverview()" id="overview-btn" class="text-xs font-semibold text-finnish-blue hover:text-finnish-blue-dark px-2.5 py-1 rounded-md border border-slate-200 hover:bg-slate-50 transition">
+                Overview (G)
+            </button>
+        </div>
+    </header>
+
+    <!-- PROGRESS BAR -->
+    <div class="w-full bg-slate-200 h-1 shrink-0 no-print">
+        <div id="progress-bar" class="bg-finnish-blue h-1 transition-all duration-300" style="width: 16.66%;"></div>
+    </div>
+
+    <!-- MAIN VIEWPORT: SINGLE SLIDE PRESENTATION -->
+    <main id="slide-viewport" class="flex-1 flex items-center justify-center p-4 sm:p-8 lg:p-12 overflow-y-auto">
+        <div class="w-full max-w-5xl">
+
+            <!-- SLIDE 1: STRATEGIC INFLECTION POINT -->
+            <section class="slide-pane slide-fade bg-white rounded-3xl border border-slate-200/90 shadow-xl p-8 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[580px]" data-slide="1">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-finnish-blue-light text-finnish-blue text-xs font-bold uppercase tracking-wider mb-6">
+                        <span class="w-2 h-2 rounded-full bg-finnish-blue"></span>
+                        Executive Briefing
+                    </div>
+
+                    <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+                        ExecutGroup Architecture &amp; Domain Strategy
+                    </h1>
+                    <p class="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed max-w-3xl mb-10">
+                        Aligning brand positioning, domain allocation, and access models between our executive decision services and our sustainability software tools.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-slate-100">
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">01. The Transition</span>
+                            <div class="font-bold text-slate-900 text-base mb-1">Beyond Compliance</div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Expanding from pure ESG into broader management capabilities: workplace, leadership, and resilience.
+                            </p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">02. The Friction</span>
+                            <div class="font-bold text-slate-900 text-base mb-1">The "ESG" Label Barrier</div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Pitching leadership and culture diagnostics under an "ESG" brand confuses HR and general management buyers.
+                            </p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">03. The Objective</span>
+                            <div class="font-bold text-slate-900 text-base mb-1">Clarity &amp; Protection</div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Create an uncompromised executive platform while fully protecting our existing sustainability SEO equity.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-8 flex items-center justify-between text-xs text-slate-400 border-t border-slate-100 mt-6">
+                    <span>Meeting Preparation: Jussi, Jyrki, Pasi, Heikki &amp; Mahdi</span>
+                    <span class="font-mono">October 2026</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: ACCESS & SIGN-IN REALITY -->
+            <section class="slide-pane slide-fade bg-white rounded-3xl border border-slate-200/90 shadow-xl p-8 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[580px] hidden" data-slide="2">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider mb-6">
+                        Technical &amp; Commercial Reality
+                    </div>
+
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                        The Three Portals &amp; The Sign-In Dilemma
+                    </h2>
+                    <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mb-8">
+                        Our users belong to three completely distinct access archetypes. Putting a generic "Sign in" button on the ExecutGroup corporate homepage causes immediate confusion.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <!-- Card 1: Aura Suite -->
+                        <div class="p-6 rounded-2xl bg-finnish-blue-light/50 border border-finnish-blue/20 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-finnish-blue text-white">TURNKEY SERVICE</span>
+                                    <span class="text-xs text-slate-400 font-mono">No Password</span>
+                                </div>
+                                <h3 class="text-lg font-bold text-slate-900 mb-2">Aura Suite</h3>
+                                <div class="text-xs font-semibold text-finnish-blue mb-3">WorkWell, Lead, Continuity, Customer</div>
+                                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                    Participants evaluate pairs using private one-time email tokens. No registration or credentials required.
+                                </p>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-white border border-slate-200 text-[11px] text-slate-600 font-mono">
+                                Token URL: /participate/{uuid}
+                            </div>
+                        </div>
+
+                        <!-- Card 2: VS Tool -->
+                        <div class="p-6 rounded-2xl bg-emerald-50/50 border border-emerald-200 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-700 text-white">FREE TOOL</span>
+                                    <span class="text-xs text-slate-400 font-mono">Self-Serve</span>
+                                </div>
+                                <h3 class="text-lg font-bold text-slate-900 mb-2">VS (VSME) Tool</h3>
+                                <div class="text-xs font-semibold text-emerald-800 mb-3">Voluntary Sustainability Reporting</div>
+                                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                    Small business users register with email and password to prepare, store, and export voluntary CSRD/VSME reports.
+                                </p>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-white border border-slate-200 text-[11px] text-slate-600 font-mono">
+                                Standard Auth: Email + Password
+                            </div>
+                        </div>
+
+                        <!-- Card 3: DMA -->
+                        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-white">SAAS PLATFORM</span>
+                                    <span class="text-xs text-slate-400 font-mono">Subscription</span>
+                                </div>
+                                <h3 class="text-lg font-bold text-slate-900 mb-2">DMA (ESGClick)</h3>
+                                <div class="text-xs font-semibold text-slate-700 mb-3">Double Materiality Assessment</div>
+                                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                    Corporate sustainability leads and consultants log in with enterprise accounts to manage DMA stakeholder campaigns.
+                                </p>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-white border border-slate-200 text-[11px] text-slate-600 font-mono">
+                                Enterprise SaaS Login
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center gap-3">
+                    <span class="text-base font-bold">⚠️</span>
+                    <span><strong>Key Insight:</strong> Enterprise executives exploring Aura diagnostic services should NOT encounter a confusing multi-login gate. Their primary next step is <strong>talking with an advisor</strong>.</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: STRATEGIC OPTIONS EVALUATION -->
+            <section class="slide-pane slide-fade bg-white rounded-3xl border border-slate-200/90 shadow-xl p-8 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[580px] hidden" data-slide="3">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider mb-6">
+                        Architectural Evaluation
+                    </div>
+
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                        Strategic Architectural Options
+                    </h2>
+                    <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mb-8">
+                        We evaluated three structural models for how domains and user access should be configured.
+                    </p>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                            <thead>
+                                <tr class="border-b-2 border-slate-200 bg-slate-50/80">
+                                    <th class="py-3 px-4 font-bold text-slate-700">Criterion</th>
+                                    <th class="py-3 px-4 font-bold text-finnish-blue bg-finnish-blue-light/50 border-x border-finnish-blue/20">
+                                        Option 1 (Recommended)<br><span class="font-normal text-xs text-slate-600">The Dual-Hub Strategy</span>
+                                    </th>
+                                    <th class="py-3 px-4 font-bold text-slate-700">
+                                        Option 2<br><span class="font-normal text-xs text-slate-500">The Unified Umbrella</span>
+                                    </th>
+                                    <th class="py-3 px-4 font-bold text-slate-700">
+                                        Option 3<br><span class="font-normal text-xs text-slate-500">The Subdomain Matrix</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-700">
+                                <tr>
+                                    <td class="py-3.5 px-4 font-semibold text-slate-900">Domain Structure</td>
+                                    <td class="py-3.5 px-4 bg-finnish-blue-light/30 border-x border-finnish-blue/20 font-medium text-finnish-blue">
+                                        ExecutGroup.com + ExecutESG.com
+                                    </td>
+                                    <td class="py-3.5 px-4">ExecutGroup.com only (301 redirect)</td>
+                                    <td class="py-3.5 px-4">app.executgroup.com portal</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3.5 px-4 font-semibold text-slate-900">Sign-In Resolution</td>
+                                    <td class="py-3.5 px-4 bg-finnish-blue-light/30 border-x border-finnish-blue/20 font-bold text-emerald-700">
+                                        ✓ Solved (No login on ExecutGroup)
+                                    </td>
+                                    <td class="py-3.5 px-4 text-amber-700">Requires complex multi-door popup</td>
+                                    <td class="py-3.5 px-4 text-slate-600">Multi-tenant portal router</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3.5 px-4 font-semibold text-slate-900">Aura Positioning</td>
+                                    <td class="py-3.5 px-4 bg-finnish-blue-light/30 border-x border-finnish-blue/20 font-bold text-emerald-700">
+                                        ✓ 100% C-Suite &amp; HR Focus
+                                    </td>
+                                    <td class="py-3.5 px-4 text-slate-600">Diluted with free SME calculators</td>
+                                    <td class="py-3.5 px-4 text-slate-600">Good</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3.5 px-4 font-semibold text-slate-900">ESG SEO Protection</td>
+                                    <td class="py-3.5 px-4 bg-finnish-blue-light/30 border-x border-finnish-blue/20 font-bold text-emerald-700">
+                                        ✓ 100% Preserved (Zero Loss)
+                                    </td>
+                                    <td class="py-3.5 px-4 text-red-600">Risky (SEO decay during 301 migration)</td>
+                                    <td class="py-3.5 px-4 text-slate-600">Preserved</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3.5 px-4 font-semibold text-slate-900">Maintenance Burden</td>
+                                    <td class="py-3.5 px-4 bg-finnish-blue-light/30 border-x border-finnish-blue/20">
+                                        Low (shared backend, distinct themes)
+                                    </td>
+                                    <td class="py-3.5 px-4 font-semibold">Lowest (1 website)</td>
+                                    <td class="py-3.5 px-4">Moderate</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                    <span>Recommendation: Adopt <strong>Option 1 (Dual-Hub)</strong> to maximize conversion on both sides.</span>
+                    <span class="text-finnish-blue font-bold">Unanimously clearest model →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: DEEP DIVE: DUAL-HUB ARCHITECTURE -->
+            <section class="slide-pane slide-fade bg-white rounded-3xl border border-slate-200/90 shadow-xl p-8 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[580px] hidden" data-slide="4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-6">
+                        Recommended Blueprint
+                    </div>
+
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                        Deep Dive: The Dual-Hub Strategy
+                    </h2>
+                    <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mb-8">
+                        Separating properties by audience and buying intent eliminates friction while preserving every euro of existing software recurring revenue and SEO equity.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+                        <!-- Hub 1: ExecutGroup -->
+                        <div class="p-7 rounded-2xl bg-white border-2 border-finnish-blue shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="font-mono text-sm font-bold text-finnish-blue">ExecutGroup.com</span>
+                                    <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase bg-finnish-blue text-white">CORPORATE &amp; ADVISORY</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2">Executive Diagnostics &amp; Decision-Making</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                    Dedicated to leadership alignment, workplace wellbeing, customer insight, and business continuity.
+                                </p>
+                                <ul class="text-xs text-slate-700 space-y-2 mb-6">
+                                    <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Products: AuraWorkWell, AuraLead, AuraCustomer, AuraContinuity</li>
+                                    <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Delivery: High-value turnkey advisory &amp; diagnostics</li>
+                                    <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Primary CTA: <strong>"Contact us" / "Discuss your situation"</strong></li>
+                                    <li class="flex items-center gap-2 font-bold text-finnish-blue"><span class="text-finnish-blue">●</span> <strong>NO "Sign In" button</strong> (eliminates buyer confusion)</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 text-[11px] text-slate-500 border border-slate-200">
+                                Cross-link: <em>"Looking for our free sustainability tool? Visit ExecutESG →"</em>
+                            </div>
+                        </div>
+
+                        <!-- Hub 2: ExecutESG -->
+                        <div class="p-7 rounded-2xl bg-slate-50 border border-slate-300 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="font-mono text-sm font-bold text-emerald-800">ExecutESG.com</span>
+                                    <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase bg-emerald-700 text-white">SUSTAINABILITY HUB</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2">Compliance Software &amp; DMA</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                    Dedicated to CSRD, ESRS compliance, voluntary SME sustainability reporting, and Double Materiality software.
+                                </p>
+                                <ul class="text-xs text-slate-700 space-y-2 mb-6">
+                                    <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Products: VS (VSME) Tool &amp; DMA SaaS Platform</li>
+                                    <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Delivery: Self-serve freemium software + SaaS subscription</li>
+                                    <li class="flex items-center gap-2 font-bold text-emerald-700"><span class="text-emerald-600">●</span> Prominent <strong>"Sign In"</strong> button for active reporting users</li>
+                                    <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Retains 100% of organic Google search traffic</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 rounded-xl bg-white text-[11px] text-slate-500 border border-slate-200">
+                                Cross-link: <em>"An ExecutGroup Company | Strategic Diagnostics →"</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-xs text-slate-500 flex items-center justify-between pt-4 border-t border-slate-100">
+                    <span>Note on <strong>AuraOS.fi</strong>: Preserved as internal API backbone or for future Finnish municipal/public tenders.</span>
+                    <span class="font-mono text-slate-400">Hub-and-Spoke Synergy</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 5: TRANSITION & OPERATIONAL ROADMAP -->
+            <section class="slide-pane slide-fade bg-white rounded-3xl border border-slate-200/90 shadow-xl p-8 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[580px] hidden" data-slide="5">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider mb-6">
+                        Implementation Blueprint
+                    </div>
+
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                        Technical &amp; Operational Transition Plan
+                    </h2>
+                    <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mb-8">
+                        The practical technical steps required before publishing and going live.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                            <div class="w-8 h-8 rounded-full bg-finnish-blue text-white flex items-center justify-center font-bold text-xs mb-4">1</div>
+                            <h3 class="text-base font-bold text-slate-900 mb-2">Email &amp; Identity Routing</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                                Configure Microsoft 365 dual-alias routing. All team members receive mail sent to both <code>@executgroup.com</code> and <code>@executesg.com</code> in the same inbox.
+                            </p>
+                            <span class="text-[11px] font-semibold text-emerald-700 font-mono">Zero communication loss</span>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                            <div class="w-8 h-8 rounded-full bg-finnish-blue text-white flex items-center justify-center font-bold text-xs mb-4">2</div>
+                            <h3 class="text-base font-bold text-slate-900 mb-2">Cross-Site Bridges</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                                Implement subtle navigation bridges in both site headers/footers. If a visitor seeks VS Reporting on ExecutGroup, they are routed smoothly without 404 errors.
+                            </p>
+                            <span class="text-[11px] font-semibold text-emerald-700 font-mono">Seamless user routing</span>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                            <div class="w-8 h-8 rounded-full bg-finnish-blue text-white flex items-center justify-center font-bold text-xs mb-4">3</div>
+                            <h3 class="text-base font-bold text-slate-900 mb-2">Product Standardisation</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                                Lock in unified product nomenclature across all collateral: <strong>AuraContinuity</strong> (Business Continuity) and <strong>AuraValue</strong> (M&amp;A Integration).
+                            </p>
+                            <span class="text-[11px] font-semibold text-emerald-700 font-mono">Unified IP library</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-100 text-slate-700 text-xs flex items-center justify-between border border-slate-200">
+                    <span>Current Website Status: <strong>Round 4 feedback 100% complete and deployed</strong> on staging.</span>
+                    <span class="font-mono text-emerald-700 font-bold">● Ready for Jussi's Case Review</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 6: LEADERSHIP DECISION CHECKPOINT -->
+            <section class="slide-pane slide-fade bg-white rounded-3xl border border-slate-200/90 shadow-xl p-8 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[580px] hidden" data-slide="6">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-finnish-blue-light text-finnish-blue text-xs font-bold uppercase tracking-wider mb-6">
+                        Executive Action Plan
+                    </div>
+
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                        Meeting Agenda &amp; Decision Checkpoint
+                    </h2>
+                    <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mb-8">
+                        The 3 strategic decisions needed from Pasi, Heikki, Jussi, and Jyrki during next week's meeting.
+                    </p>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-4">
+                            <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</div>
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900">Approve Dual-Hub Architecture</h3>
+                                <p class="text-xs text-slate-600 mt-1">
+                                    Confirm separating <code>ExecutGroup.com</code> (Executive diagnostics &amp; advisory) from <code>ExecutESG.com</code> (Sustainability compliance &amp; SaaS).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-4">
+                            <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</div>
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900">Sign-Off on No Global Sign-In on ExecutGroup</h3>
+                                <p class="text-xs text-slate-600 mt-1">
+                                    Agree that ExecutGroup remains a high-touch advisory site with "Contact us" as the primary CTA, avoiding multi-door login confusion.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-4">
+                            <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</div>
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900">Review Customer Cases &amp; Finnish Localization</h3>
+                                <p class="text-xs text-slate-600 mt-1">
+                                    Jussi confirms customer case approvals (MSK, Nokia, Toivanen, Fazer, Arla); proceed to final Finnish language translation.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                    <span>Deck Prepared by Mahdi Farimani (CTO)</span>
+                    <button onclick="goToSlide(1)" class="text-finnish-blue font-bold hover:underline">
+                        ↺ Restart Presentation
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- OVERVIEW GRID VIEW (HIDDEN BY DEFAULT, TOGGLE WITH 'G' OR BUTTON) -->
+    <div id="overview-grid" class="flex-1 p-6 sm:p-12 overflow-y-auto hidden no-print bg-slate-100">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Slide Deck Overview</h2>
+                    <p class="text-xs text-slate-500">Click any slide to jump to it directly</p>
+                </div>
+                <button onclick="toggleOverview()" class="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-semibold hover:bg-slate-800">
+                    Close Overview
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Mini Card 1 -->
+                <div onclick="goToSlide(1)" class="cursor-pointer bg-white p-5 rounded-2xl border border-slate-200 hover:border-finnish-blue hover:shadow-lg transition">
+                    <span class="text-[10px] font-mono font-bold text-finnish-blue uppercase">Slide 01</span>
+                    <h4 class="font-bold text-slate-900 text-sm mt-1">Strategic Context &amp; Inflection Point</h4>
+                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">Aligning executive decision services with sustainability software.</p>
+                </div>
+                <!-- Mini Card 2 -->
+                <div onclick="goToSlide(2)" class="cursor-pointer bg-white p-5 rounded-2xl border border-slate-200 hover:border-finnish-blue hover:shadow-lg transition">
+                    <span class="text-[10px] font-mono font-bold text-finnish-blue uppercase">Slide 02</span>
+                    <h4 class="font-bold text-slate-900 text-sm mt-1">The Three Portals &amp; Sign-In Reality</h4>
+                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">Access models across Aura, VS (VSME) Tool, and DMA SaaS.</p>
+                </div>
+                <!-- Mini Card 3 -->
+                <div onclick="goToSlide(3)" class="cursor-pointer bg-white p-5 rounded-2xl border border-slate-200 hover:border-finnish-blue hover:shadow-lg transition">
+                    <span class="text-[10px] font-mono font-bold text-finnish-blue uppercase">Slide 03</span>
+                    <h4 class="font-bold text-slate-900 text-sm mt-1">Strategic Options Evaluation</h4>
+                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">Comparative matrix of Dual-Hub vs Unified Umbrella vs Subdomain.</p>
+                </div>
+                <!-- Mini Card 4 -->
+                <div onclick="goToSlide(4)" class="cursor-pointer bg-white p-5 rounded-2xl border border-slate-200 hover:border-finnish-blue hover:shadow-lg transition">
+                    <span class="text-[10px] font-mono font-bold text-finnish-blue uppercase">Slide 04</span>
+                    <h4 class="font-bold text-slate-900 text-sm mt-1">Deep Dive: Dual-Hub Architecture</h4>
+                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">ExecutGroup (Executive &amp; Aura) + ExecutESG (Sustainability &amp; Sign-In).</p>
+                </div>
+                <!-- Mini Card 5 -->
+                <div onclick="goToSlide(5)" class="cursor-pointer bg-white p-5 rounded-2xl border border-slate-200 hover:border-finnish-blue hover:shadow-lg transition">
+                    <span class="text-[10px] font-mono font-bold text-finnish-blue uppercase">Slide 05</span>
+                    <h4 class="font-bold text-slate-900 text-sm mt-1">Transition Plan &amp; Alignment</h4>
+                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">Email aliases, cross-site links, and product naming standardization.</p>
+                </div>
+                <!-- Mini Card 6 -->
+                <div onclick="goToSlide(6)" class="cursor-pointer bg-white p-5 rounded-2xl border border-slate-200 hover:border-finnish-blue hover:shadow-lg transition">
+                    <span class="text-[10px] font-mono font-bold text-finnish-blue uppercase">Slide 06</span>
+                    <h4 class="font-bold text-slate-900 text-sm mt-1">Meeting Agenda &amp; Decisions</h4>
+                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">Key decisions needed from Pasi, Heikki, Jussi, and Jyrki.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM CONTROL BAR -->
+    <footer class="h-14 bg-white border-t border-slate-200 px-6 sm:px-10 flex items-center justify-between text-xs text-slate-500 shrink-0 no-print">
+        <div class="flex items-center gap-2">
+            <span class="hidden sm:inline">Use keyboard:</span>
+            <kbd class="px-2 py-0.5 bg-slate-100 border border-slate-300 rounded font-mono text-[10px]">←</kbd>
+            <kbd class="px-2 py-0.5 bg-slate-100 border border-slate-300 rounded font-mono text-[10px]">→</kbd>
+            <kbd class="px-2 py-0.5 bg-slate-100 border border-slate-300 rounded font-mono text-[10px]">Space</kbd>
+            <kbd class="px-2 py-0.5 bg-slate-100 border border-slate-300 rounded font-mono text-[10px]">G (Grid)</kbd>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="text-slate-600 hover:text-slate-900 font-medium">Print to PDF</button>
+            <span class="text-slate-300">•</span>
+            <span class="text-finnish-blue font-bold">Nordic Minimalist Deck</span>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SLIDE CONTROLLER SCRIPT -->
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 6;
+        let isOverview = false;
+
+        function updateSlide() {
+            const panes = document.querySelectorAll('.slide-pane');
+            panes.forEach(pane => {
+                const s = parseInt(pane.getAttribute('data-slide'));
+                if (s === currentSlide) {
+                    pane.classList.remove('hidden');
+                } else {
+                    pane.classList.add('hidden');
+                }
+            });
+
+            // Update counter and progress bar
+            document.getElementById('slide-indicator').textContent = `Slide ${currentSlide} / ${totalSlides}`;
+            const pct = (currentSlide / totalSlides) * 100;
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+
+            if (isOverview) {
+                toggleOverview();
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function goToSlide(num) {
+            if (num >= 1 && num <= totalSlides) {
+                currentSlide = num;
+                if (isOverview) {
+                    toggleOverview();
+                }
+                updateSlide();
+            }
+        }
+
+        function toggleOverview() {
+            isOverview = !isOverview;
+            const viewport = document.getElementById('slide-viewport');
+            const overview = document.getElementById('overview-grid');
+            const btn = document.getElementById('overview-btn');
+
+            if (isOverview) {
+                viewport.classList.add('hidden');
+                overview.classList.remove('hidden');
+                btn.textContent = 'Slide View (G)';
+            } else {
+                overview.classList.add('hidden');
+                viewport.classList.remove('hidden');
+                btn.textContent = 'Overview (G)';
+            }
+        }
+
+        // Keyboard navigation
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'g' || e.key === 'G') {
+                toggleOverview();
+            } else if (e.key >= '1' && e.key <= '6') {
+                goToSlide(parseInt(e.key));
+            }
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>
